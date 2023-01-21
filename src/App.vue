@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <vagas-favoritas-component/>
+    <topo-component @navegar="componente = $event"></topo-component>
+    <conteudo-principal :conteudo="componente"></conteudo-principal>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import VagasFavoritasComponent from '@/components/comuns/VagasFavoritasComponent.vue'
+import ConteudoPrincipal from '@/components/layouts/ConteudoPrincipal.vue'
+import TopoComponent from '@/components/layouts/TopoComponent.vue'
 
 export default {
   name: 'App',
+  data(){
+    return {
+     componente: 'HomeComponent'
+    }
+  },
   components: {
-    HelloWorld
+    ConteudoPrincipal: ConteudoPrincipal,
+    TopoComponent: TopoComponent,
+    VagasFavoritasComponent: VagasFavoritasComponent
+  },
+  methods: {
+    acao(p1) {
+      console.log('Ação do componente pai que foi passada para o filho ' + p1)
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+ h1{
+    color: red;
+ }
 </style>
