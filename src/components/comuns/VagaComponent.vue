@@ -6,7 +6,7 @@
                 <div class="">{{ titulo }}</div>
                 <div class="">
                     <div class="form-check form-switch">
-                        <div class="form-check-input" type="checkbox"></div>
+                        <input class="form-check-input" type="checkbox" v-model="favoritada">
                         <label for="" class="form-check-label">Favoritar</label>
                     </div>
                 </div>
@@ -25,6 +25,20 @@
 <script>
 export default {
     name: 'VagaComponent',
+    data(){
+        return {
+            favoritada: false
+        }
+    },
+    watch: {
+        favoritada(novoValor){
+            if(novoValor){
+                this.$root.emitter.emit('favoritarVaga', this.titulo)
+            }else{
+                this.$root.emitter.emit('desfavoritarVaga', this.titulo)
+            }
+        }
+    },
     props: {
         titulo: {
             type: String,
@@ -62,6 +76,9 @@ export default {
             return this.tipo == '1' ? 'CLT' : 'PJ'
         }
     },
+    methods: {
+     
+    }
 }
 </script>
 

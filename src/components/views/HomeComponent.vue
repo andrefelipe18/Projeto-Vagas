@@ -15,7 +15,7 @@
         <!-- Componente de indicadores -->
         <div class="row mt-5">
             <div class="col-4">
-                <indicador-component titulo="Vagas abertas" indicador="25"/>
+                <indicador-component titulo="Vagas abertas" :indicador="vagasAbertas"/>
             </div>
             <div class="col-4">
                 <indicador-component titulo="Profissionais cadastrados" indicador="125"/>
@@ -42,6 +42,7 @@ export default {
     return {
         usuariosOnline: 0,
         vagas: [],
+        vagasAbertas: 0,
     }
  },
  methods: {
@@ -56,6 +57,24 @@ export default {
     //Pegando os dados do localStorage
     let vagas =  JSON.parse(localStorage.getItem('vagas')) || []
     this.vagas = vagas
+
+    
+ },
+ mounted(){
+    //Pegando quantas vagas estão abertas
+    let vagas =  JSON.parse(localStorage.getItem('vagas')) || []
+    this.vagasAbertas = vagas.length
+
+    //Criando um evento para filtrar as vagas
+    this.$root.emitter.on('filtrarVagas', (filtro) => {
+        //Pegando os dados do localStorage
+        let vagas =  JSON.parse(localStorage.getItem('vagas')) || []
+        //Filtrando as vagas pelo título da vaga e armazenando em uma nova variável 
+        //O método includes verifica se o texto informado está contido no título da vaga
+        let vagasFiltradas = vagas.filter(vaga => vaga.titulo.toLowerCase().includes(filtro.titulo.toLowerCase()))
+        //Atualizando o array de vagas
+        this.vagas = vagasFiltradas
+    })
  }
 }
 </script>

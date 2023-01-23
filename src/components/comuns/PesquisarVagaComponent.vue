@@ -5,14 +5,14 @@
     <div class="col">
         <div class="form-group">
             <label for="inputPesquisa">Título da vaga</label>
-            <input type="text" class="form-control" id="inputPesquisa" placeholder="Pesquisa por palavras chaves, 'PHP', 'Pleno' etc...">
+            <input type="text" class="form-control" v-model="titulo" id="inputPesquisa" placeholder="Pesquisa por palavras chaves, 'PHP', 'Pleno' etc...">
             <small class="form-text text-muted">Informe palavras relacionadas com a vaga desejada</small>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col">
-        <button class="btn btn-outline-dark mt-2">Buscar</button>
+        <button class="btn btn-outline-dark mt-2" @click="pesquisarVaga()">Buscar</button>
     </div>
 </div>
 </div>
@@ -21,6 +21,16 @@
 <script>
 export default {
     name: 'PesquisarVagaComponent',
+    data(){
+      return {
+        titulo: '',   
+     }
+    },
+    methods: {
+        pesquisarVaga(){
+            this.$root.emitter.emit('filtrarVagas', {titulo: this.titulo})
+        }
+    },
 }
 </script>
 

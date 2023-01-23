@@ -80,7 +80,35 @@ export default {
             tipo: this.tipo,
             publicacao: dataFormatada
         })
+        if(!this.validarForm()){
+            this.$root.emitter.emit('alerta', {
+                tipo: 'danger',
+                titulo: 'Erro ao cadastrar a vaga',
+                descricao: 'Por favor, preencha todos os campos',
+            })
+            return
+        }
         localStorage.setItem('vagas', JSON.stringify(vagas))
+        this.$root.emitter.emit('alerta', {
+            tipo: 'success',
+            titulo: `A vaga ${this.titulo} foi cadastrada com sucesso`,
+            descricao: 'Parabens, a vaga foi cadastrada e podera ser consultada por milhares de profissionais',
+        })
+        this.resetForm()
+    },
+    resetForm(){
+        this.titulo = ''
+        this.descricao = ''
+        this.salario = ''
+        this.modalidade = ''
+        this.tipo = ''
+    },
+    validarForm(){
+        let valido = true
+        if(this.titulo === '' || this.descricao === '' || this.salario === '' || this.modalidade === '' || this.tipo === ''){
+        valido = false;
+        }
+        return valido
     }
  }
 }
