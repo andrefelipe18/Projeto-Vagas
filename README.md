@@ -1,24 +1,33 @@
-# vagas-front
+# vagas-front 
 
-## Project setup
+## É possivel nele criar e visualizar vagas
+
+## Como rodar o projeto
+
+### Pré-requisitos
+
+- Node.js
+- NPM ou Yarn
+
+### Instalação
+#### Clonando o projeto
+```
+git clone
+
+```
+#### Instalando as dependências
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+ou
 ```
-npm run serve
+yarn install
 ```
-
-### Compiles and minifies for production
+#### Rodando o projeto
 ```
-npm run build
+npm start
 ```
-
-### Lints and fixes files
+ou
 ```
-npm run lint
+yarn start
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
